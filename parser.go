@@ -3,13 +3,13 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
-	"errors"
 )
 
 // readCSVFile() accepts a file and returns Contact struct slice (matches JSON schema) and logErrors struct slice (error validation)
