@@ -39,7 +39,7 @@ func readCSVFile(inputPath string) (contacts []Contact, logErrors []csv.ParseErr
 }
 
 func writeRecordsToJSON(filename string, records []Contact) error {
-	asJSON, err := json.Marshal(records)
+	asJSON, err := json.MarshalIndent(records,"","\t")
 	if err != nil {
 		return err
 	}
@@ -60,9 +60,12 @@ func writeErrorsToFileAsCSV(filename string, errs []csv.ParseError) error {
 
 func errorsToCSV(lineErrors []csv.ParseError) []byte {
 	lines := make([]string, len(lineErrors)+1)
-	lines[0] = "LINE_NUM,ERROR_MSG"
-	for i, err := range lineErrors {
-		lines[i+1] = fmt.Sprintf("%d,%s", err.Line, err.Err)
+	if len(lineErrors) > 0 {
+		lines[0] = "LINE_NUM,ERROR_MSG"
+		for i, err := range lineErrors {
+			lines[i+1] = fmt.Sprintf("%d,%s", err.Line, err.Err)
+		}
 	}
 	return []byte(strings.Join(lines, "\n"))
 }
+
