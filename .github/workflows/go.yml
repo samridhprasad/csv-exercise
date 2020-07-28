@@ -1,5 +1,10 @@
 name: Build and test Go
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - sprasad
+  pull_request:
+    branches: sprasad
 jobs:
 
   build:
