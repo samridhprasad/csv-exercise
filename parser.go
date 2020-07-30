@@ -39,7 +39,7 @@ func readCSVFile(inputPath string) (contacts []Contact, logErrors []csv.ParseErr
 }
 
 func writeRecordsToJSON(filename string, records []Contact) error {
-	asJSON, err := json.MarshalIndent(records,"","\t")
+	asJSON, err := json.MarshalIndent(records, "", "\t")
 	if err != nil {
 		return err
 	}
@@ -68,4 +68,3 @@ func errorsToCSV(lineErrors []csv.ParseError) []byte {
 	}
 	return []byte(strings.Join(lines, "\n"))
 }
-

@@ -11,9 +11,9 @@ import (
 )
 
 type RelevantPaths struct {
-	inputDirPath string
+	inputDirPath  string
 	outputDirPath string
-	errorDirPath string
+	errorDirPath  string
 }
 
 type Contact struct {
@@ -28,20 +28,18 @@ type Contact struct {
 
 func main() {
 	p := new(RelevantPaths)
-	flag.StringVar(&p.inputDirPath, "input-directory","./in","input dir to watch for new csv files")
-	flag.StringVar(&p.outputDirPath,"output-directory","./out","output dir to store  JSON files")
-	flag.StringVar(&p.errorDirPath,"error-directory","./err","error dir to store validation logs")
+	flag.StringVar(&p.inputDirPath, "input-directory", "./in", "input dir to watch for new csv files")
+	flag.StringVar(&p.outputDirPath, "output-directory", "./out", "output dir to store  JSON files")
+	flag.StringVar(&p.errorDirPath, "error-directory", "./err", "error dir to store validation logs")
 	flag.Parse()
 	go func() {
 		c := time.Tick(1 * time.Second)
 		for range c {
-			// Note this loop runs the function
-			// in the same goroutine so we make sure there is
-			// only ever one.
+			// Note this loop runs the function in the same goroutine so we make sure there is only ever one
 			p.watchInputDir()
 		}
 	}()
-	// Blocking the main() from ending so the directory watcher is indefinitely active until interrupted:
+	// Blocking main() from ending so the directory watcher is indefinitely active until interrupted:
 	select {}
 
 }
@@ -55,7 +53,7 @@ func (p RelevantPaths) watchInputDir() {
 	for _, file := range currentDir {
 		fileName := file.Name()
 		if fileName != ".DS_Store" {
-			if file.IsDir() || path.Ext(fileName) != ".csv"  {
+			if file.IsDir() || path.Ext(fileName) != ".csv" {
 				log.Printf("omitting %s, not a csv file \n", fileName)
 				continue
 			} else if _, repeatedFile := seenFiles[fileName]; repeatedFile {
@@ -74,11 +72,11 @@ func (p RelevantPaths) watchInputDir() {
 
 /**
 processCSV() orchestrates the workflow of processing the the CSV file
-(1) It calls readCSVFile() to first reads the input file
+(1) It calls readCSVFile() to first read the input file
 (2) It calls writeRecordsToJSON() to write the validated fields as output
-(3) It calls to writeErrorsToFileAsCSV() the error log (if any) to CSV
+(3) It calls writeErrorsToFileAsCSV() to write the error log (if any) to CSV
 (4) It finally calls deleteCSVAfterProcessing() to delete the input file from the input dir
- */
+*/
 func (p RelevantPaths) processCSV(fileName string) error {
 	records, parseErrs, err := readCSVFile(p.absoluteInputPath(fileName))
 	if err != nil {
