@@ -26,7 +26,8 @@ This repo contains an exercise intended for Back-End Engineers.
 ## Future Improvements
  - If I had more time, I would have learned more about go routines and replace the `select{}` in main() meant to block exit so the input directory is watched continuously 
  - Would definitely prefer actual unit tests than hotswapping csv files to test different cases
- - I would also look into using well-tested file system event watchers to make this more production-ready    
+ - I would also look into using well-tested file system event watchers to make this more production-ready 
+ - Added [additional notes](Hindsight.md) for discussion with the team
 
 ## Expectations
 1. Please take no more than 8 hours to work on this exercise. Complete as much as possible and then submit your solution.

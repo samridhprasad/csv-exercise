@@ -4,8 +4,6 @@ On revisiting my code after a week, I found nuances that I had previously missed
 - I wrote unit tests to confirm line-by-line validation was its own testable entity `validator_test.go`
 - I wanted to improve the visibility of the PR by using Github Actions to run `go test -v` prior to merging
 - I ran `go fmt` to fix any formatting mishaps 
-- I found a bug where validation errors with names > 15 characters were not caught
-//TODO: Bring PR on scoir's origin up to date with forked `samridhprasad/csv-exercise/{sprasad}` 
 
 # Checklist for equivalence partitions:
 - Test each validation constraint with blank, invalid & valid inputs
